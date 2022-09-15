@@ -1,0 +1,155 @@
+/* Styles go here */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900");
+	
+	body {
+		background-image: url('../background.jpg');
+		font-family: 'Montserrat';
+	}
+
+	body, input, select, textarea {
+		color: #555555;
+		font-family: 'Montserrat';
+	}
+
+	nav {
+		background-color: #000000;
+		height: 80px;
+		width: 100%;
+	}
+
+	#btu {
+		/*background-image: url("../BLACKT-TO-USDT-BOX.svg") ;*/
+		background-color: #b5b8b1;
+		min-height: 142px;
+		margin-top: 100px;
+		border-radius: 15px;
+	}
+
+	#utb {
+		/*background-image: url("../USDT-TO-BLACKT-BOX.svg") ;*/
+		min-height: 142px;
+	}
+
+	#inv {
+		/*background-image: url("../INVEST-BOX.svg") ;*/
+		min-height: 142px;
+	}
+
+	#cub {
+		/*background-image: url("../UNLOCK-BUTTON.svg");*/
+		max-height: 43px;
+		width: 220px;
+		border: 0;
+		margin: auto;
+	}
+
+	#ub {
+		/*background: rgba(255,255,255,0);*/
+		min-height: 43px;
+		min-width: 100%;
+		border: 0px;
+		border-radius: 20px;
+		background-color: #740FFD;
+		color: white;
+		background-image: url('../metamask.png');
+		background-repeat: no-repeat;
+		background-size: 30px;
+		background-position: 10px;
+		padding-left: 25px;
+	}
+
+	#divm {
+		background: rgba(255,255,255,0);
+		border: 0;
+	}
+
+	#imgd {
+		transform: scale(1.2,1);
+		margin-left: 30px;
+	}
+
+	#imagot {
+		margin-left: 160px;
+	}
+
+	#titu {
+		margin-right: 260px;
+	}
+
+	#loader{
+		width: 50%;
+		margin-left: 25%;
+	}
+
+	.navbar {
+		/*background-color: #520CE4;*/
+		background-image: linear-gradient(to right, #3d00cd, #5b01a2);
+		color: white;
+		height: 80px;
+		width: 100%;
+	}
+
+	.navbar-dark, .fixed-top, .bg-dark, .shadow{
+		background-color: #000000;
+	}
+	
+	.btn {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-o-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out;
+		-o-transition: background-color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out;
+		background: #300ACC;
+
+		border-radius: 40px;
+		border: 0;
+		color: black;
+		height: 42px;
+		cursor: pointer;
+		display: inline-block;
+		/*padding: 0.80em 2em;*/
+		text-align: center;
+		text-decoration: none;
+		font-size: 1em;
+		font-weight: 600;
+		/*min-width: 10em;*/
+	}
+	.btn:hover {
+			background-color: #300ACC;
+			color: black;
+		}
+	button:focus{
+		box-shadow: 0 0 10px #300ACC !important;
+	}
+	.btn:focus{
+	    box-shadow: 0 0 10px #300ACC !important;
+	}
+
+	.card {
+		background: rgba(255,255,255,0);
+		color: black;
+		border: 0;
+	}
+	.input-group-text{
+		background: #000000;
+		color: white;
+		border: 0;
+		padding: 0em 2.6em;
+		height: 42px;
+	}
+
+	.form-control{
+		border-radius: 15px;
+		height: 42px;
+		border: 22;	
+	}
+
+	.form-control:focus {		
+		outline: 0 !important;
+	    box-shadow: 0 0 12px #740FFD;
+	}
