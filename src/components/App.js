@@ -33,7 +33,7 @@ class App extends Component {
  
     if (networkId === 43113){
       var badd = "0x5736d8B23E96C4E49542b660cfec0dE4b4562A2e"
-      var cadd = '0xDfF61231Ee51E0EeA1b12F810Ee407993B9F0C7A'
+      var cadd = '0x19E3A4515482f1cC4824536e767F8D35d20Cf269'
       var fadd = '0x5498BB86BC934c8D34FDA08E81D444153d0D06aD'
       this.setState({badd: badd})
     }
@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   sale = (amount) => {
-    this.state.cashier.methods.Buy(amount).send({ from: this.state.account, value: window.web3.utils.toWei((window.web3.utils.fromWei(amount,'ether')*window.web3.utils.fromWei(this.state.price,'ether')).toString(),'ether') }).on('transactionHash', (hash) => {
+    this.state.cashier.methods.Buy(amount).send({ from: this.state.account, value: window.web3.utils.toWei((window.web3.utils.fromWei(amount,'ether')*window.web3.utils.fromWei(this.state.price,'ether')+0.0001).toString(),'ether') }).on('transactionHash', (hash) => {
       this.setState({ loading: false })
     }).on('confirmation', (confirmationNumber) => {
       if (confirmationNumber > 0) { this.loadBlockchainData() } 
