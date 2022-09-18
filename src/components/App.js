@@ -8,12 +8,6 @@ import './App.css'
 class App extends Component {
 
   async componentDidMount() {
-    await this.loadWeb3()
-    await this.loadBlockchainData()
-    setInterval(() => {
-      this.loadBlockchainData()
-      console.log('change')
-    }, 60000)
   }
 
   async loadBlockchainData() {
@@ -83,11 +77,20 @@ class App extends Component {
     }
   }
 
+  async connectWallet() {
+    await this.loadWeb3()
+    await this.loadBlockchainData()
+    setInterval(() => {
+      this.loadBlockchainData()
+      console.log('change')
+    }, 60000)
+  }
+
   sale = (amount) => {
     this.state.cashier.methods.Buy(amount).send({ from: this.state.account, value: window.web3.utils.toWei((window.web3.utils.fromWei(amount,'ether')*window.web3.utils.fromWei(this.state.price,'ether')+0.0001).toString(),'ether') }).on('transactionHash', (hash) => {
       this.setState({ loading: false })
     }).on('confirmation', (confirmationNumber) => {
-      if (confirmationNumber > 0) { this.loadBlockchainData() } 
+      if (confirmationNumber < 2) { this.loadBlockchainData() } 
     })
   }
 
@@ -158,9 +161,12 @@ class App extends Component {
 
   render() {
     let content
-    if(this.state.loading) {
-      content = <img id="loader" src={blogo} alt=""/>
+    let name
+    if (this.state.account == '0x0'){
+      name = 'Connect wallet'
     } else {
+      name = this.state.account.substring(0,6)+'...'+this.state.account.substring(this.state.account.length-4, this.state.account.length)
+    }
       content = <Main
         uTokenBalance={this.state.uTokenBalance}
         bTokenBalance={this.state.bTokenBalance}
@@ -171,18 +177,30 @@ class App extends Component {
         addToken={this.addToken}
         switchNetwork={this.switchNetwork}
       />
-    }
 
+    
     return (
       <div>
-        <Navbar/>
-        <div className="container-fluid mt-5">
+        <Navbar connectWallet={this.connectWallet} account={this.state.account}/>
+        <div className="container-fluid">
           <div className="row">
             <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '531px' }}>
               <div className="content mr-auto ml-auto">
                 
+                 <div id='cub1' className="mt-4" >
+                  <button
+                  id='ub1'
+                  type="submit"
+                  onClick={(event) => {
+
+                    event.preventDefault()
+                    this.connectWallet()
+                  }}> {name}
+                  </button>
+                </div>
 
                 {content}
+               
 
               </div>
             </main>
