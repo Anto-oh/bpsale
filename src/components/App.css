@@ -18,7 +18,7 @@
 	}
 
 	#btu {
-		/*background-image: url("../BLACKT-TO-USDT-BOX.svg") ;*/
+		
 		background-color: #b5b8b1;
 		min-height: 142px;
 		margin-top: 100px;
@@ -26,19 +26,26 @@
 	}
 
 	#utb {
-		/*background-image: url("../USDT-TO-BLACKT-BOX.svg") ;*/
+		
 		min-height: 142px;
 	}
 
 	#inv {
-		/*background-image: url("../INVEST-BOX.svg") ;*/
+		
 		min-height: 142px;
 	}
 
 	#cub {
-		/*background-image: url("../UNLOCK-BUTTON.svg");*/
+		
 		max-height: 43px;
 		width: 220px;
+		border: 0;
+		margin: auto;
+	}
+
+	#cub1 {
+		max-height: 43px;
+		width: 300px;
 		border: 0;
 		margin: auto;
 	}
@@ -56,6 +63,21 @@
 		background-size: 30px;
 		background-position: 10px;
 		padding-left: 25px;
+	}
+
+	#ub1 {
+		/*background: rgba(255,255,255,0);*/
+		min-height: 43px;
+		min-width: 100%;
+		border: 0px;
+		border-radius: 20px;
+		background-color: #740FFD;
+		color: white;
+		/*background-image: url('../metamask.png');*/
+		background-repeat: no-repeat;
+		background-size: 30px;
+		background-position: 10px;
+		/*padding-left: 25px;*/
 	}
 
 	#divm {
