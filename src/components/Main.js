@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import blck from '../ISO.png'
 import MediaQuery from 'react-responsive'
+import Web3 from 'web3'
 
 class Main extends Component {
+
   constructor() {
+    window.web3 = new Web3(window.ethereum)
     super();
     this.state = {
       text: ''
@@ -22,6 +25,9 @@ class Main extends Component {
                 let amount
                 amount = this.inputb.value.toString()
                 amount = window.web3.utils.toWei(amount, 'ether')
+                console.log(amount)
+                console.log(this.props.price)
+                console.log(amount*this.props.price/(10**18))
                 this.props.sale(amount)
               }}>
               <div style={{padding: "20px"}}>
@@ -89,6 +95,7 @@ class Main extends Component {
           }}> Add C-Chain
           </button>
         </div>
+        
 </div>
 </MediaQuery>
       <MediaQuery maxWidth={1224}>
