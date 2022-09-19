@@ -27,6 +27,7 @@ class App extends Component {
     
     if (networkId !== 43113 && networkId !== 43114){
         window.alert('Please conect to Avalanche network.')
+        window.location.reload(false)
       }else{ this.setState({ opn: true }) }
  
     if (networkId === 43113){
