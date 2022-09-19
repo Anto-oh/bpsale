@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import Main from './Main'
-import Navbar from './Navbar'
-import blogo from '../logosbpay/Imagotipo_morado.png'
 import './App.css'
+import imago from '../logosbpay/Logotipo_blanco.png'
+
 
 class App extends Component {
 
@@ -16,6 +16,10 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     window.ethereum.on('accountsChanged', function (accounts) {
+      window.location.reload(false)
+    })
+
+    window.ethereum.on('networkChanged', function (networkId) {
       window.location.reload(false)
     })
 
@@ -162,7 +166,7 @@ class App extends Component {
   render() {
     let content
     let name
-    if (this.state.account == '0x0'){
+    if (this.state.account === '0x0'){
       name = 'Connect wallet'
     } else {
       name = this.state.account.substring(0,6)+'...'+this.state.account.substring(this.state.account.length-4, this.state.account.length)
@@ -181,13 +185,18 @@ class App extends Component {
     
     return (
       <div>
-        <Navbar connectWallet={this.connectWallet} account={this.state.account}/>
-        <div className="container-fluid">
-          <div className="row">
-            <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '531px' }}>
-              <div className="content mr-auto ml-auto">
-                
-                 <div id='cub1' className="mt-4" >
+        
+        <nav className="navbar ">
+        <a
+          id='imagot'
+          className="navbar-brand col-sm-3 col-md-2 mr-0"
+          href="https://www.blockpay.mx/"
+          target="_self"
+          rel="noopener noreferrer"
+        >
+          <img src={imago} height="40" className="d-inline-block align-top" alt="" />
+        </a>
+        <div id='cub1' className="navbar-nav" >
                   <button
                   id='ub1'
                   type="submit"
@@ -197,7 +206,13 @@ class App extends Component {
                     this.connectWallet()
                   }}> {name}
                   </button>
-                </div>
+                </div>  
+        
+      </nav>
+        <div className="container-fluid">
+          <div className="row">
+            <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '531px' }}>
+              <div className="content mr-auto ml-auto">
 
                 {content}
                
