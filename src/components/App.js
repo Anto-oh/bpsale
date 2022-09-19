@@ -189,7 +189,7 @@ class App extends Component {
         <nav className="navbar ">
         <a
           id='imagot'
-          className="navbar-brand col-sm-3 col-md-2 mr-0"
+          className="navbar-brand"
           href="https://www.blockpay.mx/"
           target="_self"
           rel="noopener noreferrer"
