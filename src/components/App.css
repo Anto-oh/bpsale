@@ -45,9 +45,10 @@
 
 	#cub1 {
 		max-height: 43px;
-		width: 300px;
-		border: 0;
+		width: 200px;
+		border: 0px;
 		margin: auto;
+		margin-right: 100px;
 	}
 
 	#ub {
