@@ -39,7 +39,7 @@ class App extends Component {
 
     if (networkId === 43114){
       badd = "0x8CcEE641C3D937dC89D1d94fe4D8051624042Fcf"
-      cadd = '0xC3cAd055c595D934cb8a563B08B824E3d2989C54' 
+      cadd = '0x19E3A4515482f1cC4824536e767F8D35d20Cf269' 
       fadd = '0x0A77230d17318075983913bC2145DB16C7366156'
       this.setState({badd: badd})
     }
