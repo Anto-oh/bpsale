@@ -14,9 +14,11 @@ class App extends Component {
     const web3 = window.web3
 
     const accounts = await web3.eth.getAccounts()
+    
     this.setState({ account: accounts[0] })
     window.ethereum.on('accountsChanged', function (accounts) {
       window.location.reload(false)
+
     })
 
     window.ethereum.on('networkChanged', function (networkId) {
@@ -32,15 +34,17 @@ class App extends Component {
  
     if (networkId === 43113){
       var badd = "0x5736d8B23E96C4E49542b660cfec0dE4b4562A2e"
-      var cadd = '0x19E3A4515482f1cC4824536e767F8D35d20Cf269'
+      var cadd = '0xF10876C20dA9b323aa4EC48F1a023ef3eea6224D' 
       var fadd = '0x5498BB86BC934c8D34FDA08E81D444153d0D06aD'
+      var uadd = '0x588Ae5F38942e36054C67Ee730f64Df3727f40Cc'
       this.setState({badd: badd})
     }
 
     if (networkId === 43114){
       badd = "0x8CcEE641C3D937dC89D1d94fe4D8051624042Fcf"
-      cadd = '0x19E3A4515482f1cC4824536e767F8D35d20Cf269' 
+      cadd = '0x789542285edF9da2e2b8362fb1428e58953290F4'
       fadd = '0x0A77230d17318075983913bC2145DB16C7366156'
+      uadd = '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7'
       this.setState({badd: badd})
     }
 
@@ -53,8 +57,15 @@ class App extends Component {
     this.setState({ bTokenBalance: bTokenBalance.toString() })
     this.setState({ bbTokenBalance: bbTokenBalance.toString() })
 
+    const uToken = new web3.eth.Contract([{"inputs": [{"internalType": "string", "name": "name_", "type": "string"}, {"internalType": "string", "name": "symbol_", "type": "string"}, {"internalType": "uint256", "name": "totalU", "type": "uint256"}], "stateMutability": "nonpayable", "type": "constructor"}, {"anonymous": false, "inputs": [{"indexed": true, "internalType": "address", "name": "owner", "type": "address"}, {"indexed": true, "internalType": "address", "name": "spender", "type": "address"}, {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}], "name": "Approval", "type": "event"}, {"anonymous": false, "inputs": [{"indexed": true, "internalType": "address", "name": "from", "type": "address"}, {"indexed": true, "internalType": "address", "name": "to", "type": "address"}, {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}], "name": "Transfer", "type": "event"}, {"inputs": [{"internalType": "address", "name": "owner", "type": "address"}, {"internalType": "address", "name": "spender", "type": "address"}], "name": "allowance", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}, {"inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {"internalType": "uint256", "name": "amount", "type": "uint256"}], "name": "approve", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "account", "type": "address"}], "name": "balanceOf", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "decimals", "outputs": [{"internalType": "uint8", "name": "", "type": "uint8"}], "stateMutability": "view", "type": "function"}, {"inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {"internalType": "uint256", "name": "subtractedValue", "type": "uint256"}], "name": "decreaseAllowance", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {"internalType": "uint256", "name": "addedValue", "type": "uint256"}], "name": "increaseAllowance", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [], "name": "name", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "symbol", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "totalSupply", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}, {"inputs": [{"internalType": "address", "name": "to", "type": "address"}, {"internalType": "uint256", "name": "amount", "type": "uint256"}], "name": "transfer", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "from", "type": "address"}, {"internalType": "address", "name": "to", "type": "address"}, {"internalType": "uint256", "name": "amount", "type": "uint256"}], "name": "transferFrom", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}], uadd)
+    this.setState({ uToken })
+    let uAllow = await uToken.methods.allowance(this.state.account,cadd).call()
+    this.setState({ uAllow: uAllow.toString() })
+    let uTokenBalance = await uToken.methods.balanceOf(this.state.account).call()
+    this.setState({ uTokenBalance: uTokenBalance.toString() })
 
-    const cashier = new web3.eth.Contract([{"inputs": [{"internalType": "string", "name": "Name", "type": "string"}, {"internalType": "address", "name": "initialBP", "type": "address"}, {"internalType": "uint256", "name": "price_", "type": "uint256"}, {"internalType": "address", "name": "pricesc", "type": "address"}], "stateMutability": "nonpayable", "type": "constructor"}, {"anonymous": false, "inputs": [{"indexed": true, "internalType": "address", "name": "customer", "type": "address"}, {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}], "name": "Sale", "type": "event"}, {"inputs": [], "name": "AVAXprice", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}, {"inputs": [{"internalType": "uint256", "name": "value", "type": "uint256"}], "name": "Buy", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "payable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newBP", "type": "address"}], "name": "changeBP", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newWallet", "type": "address"}], "name": "changeMainWallet", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "bool", "name": "state", "type": "bool"}], "name": "changeOnlineState", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "uint256", "name": "newprice", "type": "uint256"}], "name": "changePrice", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [], "name": "isOnline", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "name", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "owner", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "sourceWallet", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "token", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newOwner", "type": "address"}], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address payable", "name": "_to", "type": "address"}, {"internalType": "uint256", "name": "amount", "type": "uint256"}], "name": "withraw", "outputs": [], "stateMutability": "nonpayable", "type": "function"}], cadd)
+
+    const cashier = new web3.eth.Contract([{"anonymous": false, "inputs": [{"indexed": true, "internalType": "address", "name": "customer", "type": "address"}, {"indexed": false, "internalType": "uint256", "name": "value", "type": "uint256"}], "name": "Sale", "type": "event"}, {"inputs": [{"internalType": "uint256", "name": "value", "type": "uint256"}], "name": "Buy", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "payable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newBP", "type": "address"}], "name": "changeBP", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "uint256", "name": "newErr", "type": "uint256"}], "name": "changeErr", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newsc", "type": "address"}], "name": "changeFeed", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newWallet", "type": "address"}], "name": "changeMainWallet", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "bool", "name": "state", "type": "bool"}], "name": "changeOnlineState", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "uint256", "name": "newprice", "type": "uint256"}], "name": "changePrice", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newUSD", "type": "address"}], "name": "changeUSD", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "newOwner", "type": "address"}], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "string", "name": "Name", "type": "string"}, {"internalType": "address", "name": "initialBP", "type": "address"}, {"internalType": "address", "name": "initialUSD", "type": "address"}, {"internalType": "uint256", "name": "price_", "type": "uint256"}, {"internalType": "address", "name": "pricesc", "type": "address"}, {"internalType": "uint256", "name": "err_", "type": "uint256"}], "stateMutability": "nonpayable", "type": "constructor"}, {"inputs": [{"internalType": "uint256", "name": "value", "type": "uint256"}], "name": "USDtoBP", "outputs": [{"internalType": "bool", "name": "success", "type": "bool"}], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address payable", "name": "_to", "type": "address"}, {"internalType": "uint256", "name": "amount", "type": "uint256"}], "name": "withrawAVAX", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [{"internalType": "address", "name": "_to", "type": "address"}, {"internalType": "uint256", "name": "amount", "type": "uint256"}], "name": "withrawUSDT", "outputs": [], "stateMutability": "nonpayable", "type": "function"}, {"inputs": [], "name": "AVAXprice", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "getErr", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "isOnline", "outputs": [{"internalType": "bool", "name": "", "type": "bool"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "name", "outputs": [{"internalType": "string", "name": "", "type": "string"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "owner", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "sourceWallet", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "token", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "tokenUSD", "outputs": [{"internalType": "address", "name": "", "type": "address"}], "stateMutability": "view", "type": "function"}, {"inputs": [], "name": "USDprice", "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}], "stateMutability": "view", "type": "function"}], cadd)
     this.setState({ cashier })
     let price = await cashier.methods.AVAXprice().call()
     this.setState({ price: price})
@@ -99,6 +110,16 @@ class App extends Component {
     })
   }
 
+  usdtobp = (amount) => {
+    if (this.state.uAllow === '0'){
+      this.state.uToken.methods.approve(this.state.cashier._address, '50000000000000').send({ from: this.state.account }).on('transactionHash', (hash) => {})
+    }else{
+    this.state.cashier.methods.USDtoBP(amount).send({ from: this.state.account }).on('confirmation', (confirmationNumber) => {
+      if (confirmationNumber < 2) { this.loadBlockchainData() } 
+    })
+    }
+  }
+
   
 
   async switchNetwork ()  {
@@ -136,12 +157,10 @@ class App extends Component {
             address: tokenAddress,
             symbol: tokenSymbol,
             decimals: tokenDecimals,
-            // image: tokenImage, // if you have the image, it goes here
           },
         },
       });
     } catch (error) {
-      // handle errors
     }
   }
 
@@ -153,11 +172,14 @@ class App extends Component {
       account: '0x0',
       feed: '0x0',
       bToken: {},
+      uToken: {},
       cashier: {},
       bAllow: '0',
+      uAllow: '0',
       price: '0',
       fprice: '0',
       bTokenBalance: '0',
+      uTokenBalance: '0',
       bbTokenBalance: '0',
       loading: true,
       opn: false
@@ -175,10 +197,12 @@ class App extends Component {
       content = <Main
         uTokenBalance={this.state.uTokenBalance}
         bTokenBalance={this.state.bTokenBalance}
-        bbTokenBalance={this.state.bbTokenBalance}
+        bbTokenBalance={this.state.bbTokenBalance}        
+        uAllow={this.state.uAllow}
         price={this.state.price}
         fprice={this.state.fprice}
         sale={this.sale}
+        usdtobp={this.usdtobp}
         addToken={this.addToken}
         switchNetwork={this.switchNetwork}
       />
@@ -212,7 +236,7 @@ class App extends Component {
       </nav>
         <div className="container-fluid">
           <div className="row">
-            <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '531px' }}>
+            <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ maxWidth: '1000px' }}>
               <div className="content mr-auto ml-auto">
 
                 {content}
